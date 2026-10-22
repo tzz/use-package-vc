@@ -1,0 +1,35 @@
+#+TITLE: use-package-vc — review and upgrade :vc packages
+
+Packages installed with =use-package= =:vc= (or =package-vc-install=) do
+not appear as upgradable in =list-packages=, and =package-vc-upgrade-all=
+pulls every repository without showing what changed.  This package adds
+the review step: a buffer listing every VC package with how far behind
+its upstream it is, the incoming commits, and an upgrade command that
+pulls one package at a time, honouring =package-review-policy= (Emacs 31)
+before each pull.
+
+#+begin_example
+M-x use-package-vc-list
+#+end_example
+
+In the =*VC Packages*= buffer: =g= fetch and refresh, =RET= incoming
+commits, =d= incoming diff, =U= mark every package that is behind, =m= /
+=u= mark / unmark, =x= upgrade the marked packages, =q= bury.
+
+=use-package-vc-reload-after-upgrade= controls what happens to loaded
+code after an upgrade (a package's own =NAME-reload= command is used when
+it has one).
+
+Only Git repositories are inspected for "behind" status.  All VCS work
+goes through =vc-git-command=; nothing runs through a shell.
+
+* Requirements
+
+Emacs 29.1 or newer.  The review step uses =package-review= on Emacs 31
+and a plain prompt before that.
+
+* Developer check
+
+=dev/use-package-vc-testdrive.el=: =M-x use-package-vc-testdrive= builds a
+throwaway upstream repository, installs from it, advances it, drives the
+list and upgrade flow and reports PASS/FAIL.
