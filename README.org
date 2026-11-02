@@ -34,6 +34,10 @@ and a plain prompt before that.
 throwaway upstream repository, installs from it, advances it, drives the
 list and upgrade flow and reports PASS/FAIL.
 
+* License
+
+Apache License 2.0; see =LICENSE=.
+
 * Authorship
 
 This package was written with substantial assistance from Claude
